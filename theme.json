@@ -1,0 +1,16 @@
+{
+    "horizontal_slider": {
+        "normal_bg": "#25292e",
+        "hovered_bg": "#35393e",
+        "disabled_bg": "#25292e",
+        "normal_border": "#CCCCCC",
+        "hovered_border": "#FFFFFF",
+        "disabled_border": "#777777",
+        "normal_slider_button": "#DDDDDD",
+        "hovered_slider_button": "#EEEEEE",
+        "disabled_slider_button": "#AAAAAA"
+    },
+    "label": {
+        "normal_text": "#FFFFFF"
+    }
+}
