@@ -1,3 +1,4 @@
+# patterns.py : 
 from abc import ABC, abstractmethod
 
 class Subject:

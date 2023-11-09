@@ -1,14 +1,3 @@
-#  main.py :
-# from simulation import PhysarumSimulation
-# from config import Config
-
-
-# if __name__ == "__main__":
-
-#     simulation = PhysarumSimulation(Config.GRID_SIZE, Config.AGENT_COUNT, Config.FOOD_COUNT)
-#     simulation.run()
-
-
 # main.py
 from PyQt6.QtWidgets import QApplication, QMainWindow, QSlider, QVBoxLayout, QWidget, QLabel
 from PyQt6.QtCore import Qt, QTimer
@@ -84,7 +73,7 @@ class MainWindow(QMainWindow):
 
     def update_simulation(self):
         # Code to update simulation and Pygame display
-        self.simulation.run_step()  # You need to implement this method
+        self.simulation.run_step()  
         self.image_widget.update()  # Refresh the PyQt6 widget displaying the Pygame surface
 
 
@@ -95,8 +84,17 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow(simulation)
     window.show()
-    # exit py game if the window is closed
     sys.exit(app.exec())
-    # sys.exit(app.exec())
+
 
     
+
+#  main.py :
+# from simulation import PhysarumSimulation
+# from config import Config
+
+
+# if __name__ == "__main__":
+
+#     simulation = PhysarumSimulation(Config.GRID_SIZE, Config.AGENT_COUNT, Config.FOOD_COUNT)
+#     simulation.run()
