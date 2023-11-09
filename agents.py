@@ -8,13 +8,19 @@ class PhysarumAgent(Subject, Agent):
     """ Agent class for the Physarum simulation."""
     def __init__(self, x, y, angle):
         super().__init__()
-        print(f'Creating agent at ({x}, {y}) with angle {angle}')
+        
         self.x = int(x)  # Make sure this is an integer
         self.y = int(y)  # Make sure this is an integer
         self.angle = float(angle)  # Make sure this is a float
         self.state = SearchState()
         self.grid_size = Config.GRID_SIZE
 
+        # Assign random values for sensor and move distance for each agent
+        self.sensor_distance = np.random.uniform(low=2.0, high=8.0)  # Adjust range as needed
+        self.move_distance = np.random.uniform(low=2.0, high=4.0)  # Adjust range as needed
+
+        print(f'Creating agent at ({x}, {y}) with angle {angle}')
+        print(f'Agent {self} moving {self.move_distance} units with sensor distance {self.sensor_distance}')
 
     def sense_and_move(self, grid):
         x = float(self.x)
@@ -23,8 +29,11 @@ class PhysarumAgent(Subject, Agent):
 
         # Use configuration values
         sensor_angle = Config.SENSOR_ANGLE
-        sensor_distance = Config.SENSOR_DISTANCE
-        move_distance = Config.MOVE_DISTANCE
+        # sensor_distance = Config.SENSOR_DISTANCE
+        sensor_distance = self.sensor_distance
+        # move_distance = Config.MOVE_DISTANCE
+        move_distance = self.move_distance
+        
         food_value = Config.FOOD_RADIUS
         grid_size = Config.GRID_SIZE
 

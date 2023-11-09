@@ -1,5 +1,5 @@
 # main.py
-from PyQt6.QtWidgets import QApplication, QMainWindow, QSlider, QVBoxLayout, QWidget, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QSlider, QVBoxLayout, QWidget, QLabel, QPushButton
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6 import QtGui
 from PyQt6.QtGui import QImage, QPixmap, QPainter
@@ -40,6 +40,16 @@ class SliderWidget(QWidget):
     def value_changed(self,value):
         self.label.setText(self.name+": "+str(value))
 
+class ButtonWidget(QWidget):
+    def __init__(self, name, callback, parent=None):
+        super(ButtonWidget, self).__init__(parent)
+        self.name = name
+        self.button = QPushButton(self.name)
+        self.button.clicked.connect(callback)  # Connect to the provided callback
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.button)
+        self.setLayout(self.layout)
+
 class MainWindow(QMainWindow):
     def __init__(self, simulation, parent=None):
         super(MainWindow, self).__init__(parent)
@@ -60,10 +70,18 @@ class MainWindow(QMainWindow):
         self.slider_decay.slider.valueChanged.connect(self.simulation.update_decay)
         self.slider_diffusion.slider.valueChanged.connect(self.simulation.update_diffusion)
 
+        # Add a restart button
+        self.restart_button = ButtonWidget("Restart Simulation", self.restart_simulation)
+
+        # Add an exit button
+        self.exit_button = ButtonWidget("Exit Application", self.quit_apps)
+
         # Arrange widgets in the layout
         layout = QVBoxLayout()
         layout.addWidget(self.slider_decay)
         layout.addWidget(self.slider_diffusion)
+        layout.addWidget(self.restart_button)
+        layout.addWidget(self.exit_button)
         self.centralWidget().setLayout(layout)
 
         # Timer to update the Pygame simulation
@@ -76,6 +94,17 @@ class MainWindow(QMainWindow):
         self.simulation.run_step()  
         self.image_widget.update()  # Refresh the PyQt6 widget displaying the Pygame surface
 
+    def restart_simulation(self):
+        """ Restarts the simulation. """
+        self.simulation = PhysarumSimulation(Config.GRID_SIZE, Config.AGENT_COUNT, Config.FOOD_COUNT)  # Reinitialize the simulation
+
+
+    def quit_apps(self):
+        """ Quits the application. """
+        self.timer.stop()
+        pygame.quit()
+        app.quit()
+        sys.exit()
 
 if __name__ == "__main__":
     pygame.init()
