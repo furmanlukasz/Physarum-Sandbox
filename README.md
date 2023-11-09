@@ -19,7 +19,7 @@ Welcome to Physarum-Sandbox, an interactive simulation sandbox that implements g
 
 ## Installation
 Clone the repository to your local machine using:
-`git clone https://github.com/your-github/Physarum-Sandbox.git`
+`git clone https://github.com/furmanlukasz/Physarum-Sandbox.git`
 
 Install the required packages:
 `pip install PyQt6 pygame numba numpy`
